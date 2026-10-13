@@ -1,10 +1,10 @@
-package com.cefetmg.teste;
+package com.cefet.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TesteApplicationTests {
+class BackendApplicationTests {
 
 	@Test
 	void contextLoads() {
