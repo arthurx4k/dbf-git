@@ -40,18 +40,19 @@ public class SecurityConfig {
 
                 .requestMatchers(HttpMethod.POST, "/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
-                .requestMatchers(HttpMethod.GET, "/usuarios/existe").permitAll()
+                .requestMatchers(HttpMethod.GET,  "/usuarios/existe").permitAll()
 
-                .requestMatchers(HttpMethod.GET, "/usuarios/meus-dados").authenticated()
+                .requestMatchers(HttpMethod.GET,   "/usuarios/meus-dados").authenticated()
                 .requestMatchers(HttpMethod.PATCH, "/usuarios/senha").authenticated()
-                .requestMatchers(HttpMethod.POST, "/uploads").authenticated()
+                .requestMatchers(HttpMethod.POST,  "/uploads").authenticated()
 
-                .requestMatchers("/questoes/**").hasAnyAuthority("PROFESSOR", "ADMINISTRADOR")
-                .requestMatchers("/atividades/**").hasAnyAuthority("PROFESSOR", "ADMINISTRADOR")
-                .requestMatchers("/categorias/**").hasAnyAuthority("PROFESSOR", "ADMINISTRADOR")
-
+                .requestMatchers(HttpMethod.GET,    "/professores").hasAuthority("ADMINISTRADOR")
                 .requestMatchers(HttpMethod.DELETE, "/professores/**").hasAuthority("ADMINISTRADOR")
-                .requestMatchers(HttpMethod.GET, "/professores").hasAuthority("ADMINISTRADOR")
+
+                .requestMatchers("/professores/**").hasAuthority("PROFESSOR")
+                .requestMatchers("/questoes/**").hasAuthority("PROFESSOR")
+                .requestMatchers("/atividades/**").hasAuthority("PROFESSOR")
+                .requestMatchers("/categorias/**").hasAuthority("PROFESSOR")
 
                 .anyRequest().authenticated())
 
@@ -67,14 +68,10 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    @Bean public PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
 
     @Bean
-    public AuthenticationManager authenticationManager(
-            AuthenticationConfiguration cfg) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration cfg) throws Exception {
         return cfg.getAuthenticationManager();
     }
 }

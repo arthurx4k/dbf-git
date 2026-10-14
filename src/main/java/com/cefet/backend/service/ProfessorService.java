@@ -46,7 +46,7 @@ public class ProfessorService {
     }
 
     public List<ProfessorResponseDTO> listarTodos() {
-        return professorRepository.findAll().stream()
+        return professorRepository.findAllProfessores().stream()
                 .map(ProfessorResponseDTO::new)
                 .collect(Collectors.toList());
     }

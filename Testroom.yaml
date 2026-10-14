@@ -1,0 +1,695 @@
+_type: export
+__export_format: 4
+__export_date: 2026-10-14T00:00:00.000Z
+__export_source: insomnia.desktop.app:v2023.5.8
+resources:
+  - _id: wrk_testroom
+    parentId: null
+    modified: 1789758113653
+    created: 1789758113653
+    name: Testroom API
+    description: ""
+    scope: collection
+    _type: workspace
+
+  - _id: fld_auth
+    parentId: wrk_testroom
+    modified: 1789758113653
+    created: 1789758113653
+    name: Autenticação
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -5000
+    _type: request_group
+
+  - _id: req_login_prof
+    parentId: fld_auth
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/login"
+    name: Login - Professor
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        { "email": "prof@testroom.com", "senha": "prof" }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -5000
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: req_login_admin
+    parentId: fld_auth
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/login"
+    name: Login - Administrador
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        { "email": "admin@testroom.com", "senha": "admin" }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -4990
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: fld_usuarios
+    parentId: wrk_testroom
+    modified: 1789758113653
+    created: 1789758113653
+    name: Usuário
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -4900
+    _type: request_group
+
+  - _id: req_cad_prof
+    parentId: fld_usuarios
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/usuarios"
+    name: Cadastrar - Professor
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        { "email": "prof@testroom.com", "senha": "prof", "cargo": "PROFESSOR" }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -4900
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: req_cad_admin
+    parentId: fld_usuarios
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/usuarios"
+    name: Cadastrar - Administrador
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        { "email": "admin@testroom.com", "senha": "admin", "cargo": "ADMINISTRADOR" }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -4890
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: req_existe
+    parentId: fld_usuarios
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/usuarios/existe?email=prof@testroom.com"
+    name: Verificar e-mail existe
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/2023.5.8
+    authentication: {}
+    metaSortKey: -4880
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: req_meus_dados_prof
+    parentId: fld_usuarios
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/usuarios/meus-dados"
+    name: Meus dados - Professor
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: Authorization
+        value: Bearer {{ _.token_prof }}
+    authentication: {}
+    metaSortKey: -4870
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: req_meus_dados_admin
+    parentId: fld_usuarios
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/usuarios/meus-dados"
+    name: Meus dados - Administrador
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: Authorization
+        value: Bearer {{ _.token_admin }}
+    authentication: {}
+    metaSortKey: -4860
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: req_alterar_senha
+    parentId: fld_usuarios
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/usuarios/senha"
+    name: Alterar minha senha
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        { "senha": "novaSenha123" }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: Authorization
+        value: Bearer {{ _.token_prof }}
+    authentication: {}
+    metaSortKey: -4850
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: fld_professores
+    parentId: wrk_testroom
+    modified: 1789758113653
+    created: 1789758113653
+    name: Professor
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -4800
+    _type: request_group
+
+  - _id: req_prof_listar_admin
+    parentId: fld_professores
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/professores"
+    name: Listar todos - ADMIN (200)
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: Authorization
+        value: Bearer {{ _.token_admin }}
+    authentication: {}
+    metaSortKey: -4800
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: req_prof_listar_prof
+    parentId: fld_professores
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/professores"
+    name: Listar todos - PROFESSOR (403)
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: Authorization
+        value: Bearer {{ _.token_prof }}
+    authentication: {}
+    metaSortKey: -4790
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: req_prof_buscar
+    parentId: fld_professores
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/professores/1"
+    name: Buscar por ID - PROFESSOR (200)
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: Authorization
+        value: Bearer {{ _.token_prof }}
+    authentication: {}
+    metaSortKey: -4780
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: req_prof_deletar_admin
+    parentId: fld_professores
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/professores/1"
+    name: Deletar - ADMIN (204)
+    method: DELETE
+    body: {}
+    parameters: []
+    headers:
+      - name: Authorization
+        value: Bearer {{ _.token_admin }}
+    authentication: {}
+    metaSortKey: -4770
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: req_prof_deletar_prof
+    parentId: fld_professores
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/professores/1"
+    name: Deletar - PROFESSOR (403)
+    method: DELETE
+    body: {}
+    parameters: []
+    headers:
+      - name: Authorization
+        value: Bearer {{ _.token_prof }}
+    authentication: {}
+    metaSortKey: -4760
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: fld_categorias
+    parentId: wrk_testroom
+    modified: 1789758113653
+    created: 1789758113653
+    name: Categoria
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -4600
+    _type: request_group
+
+  - _id: req_cat_criar
+    parentId: fld_categorias
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/categorias?professorId=1"
+    name: Criar - PROFESSOR (201)
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        { "nome": "Matemática Básica", "descricao": "Aritmética e álgebra" }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: Authorization
+        value: Bearer {{ _.token_prof }}
+    authentication: {}
+    metaSortKey: -4600
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: req_cat_listar_prof
+    parentId: fld_categorias
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/categorias?professorId=1"
+    name: Listar - PROFESSOR (200)
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: Authorization
+        value: Bearer {{ _.token_prof }}
+    authentication: {}
+    metaSortKey: -4590
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: req_cat_listar_admin
+    parentId: fld_categorias
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/categorias?professorId=1"
+    name: Listar - ADMIN (403)
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: Authorization
+        value: Bearer {{ _.token_admin }}
+    authentication: {}
+    metaSortKey: -4580
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: fld_questoes
+    parentId: wrk_testroom
+    modified: 1789758113653
+    created: 1789758113653
+    name: Questão
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -4500
+    _type: request_group
+
+  - _id: req_q_criar
+    parentId: fld_questoes
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/questoes?professorId=1"
+    name: Criar - PROFESSOR (201)
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "tipoQuestao": "UNICA_ESCOLHA",
+          "enunciado": "Quanto é 2 + 2?",
+          "categoriaIds": [1],
+          "alternativas": [
+            { "texto": "3", "verdadeira": false },
+            { "texto": "4", "verdadeira": true },
+            { "texto": "5", "verdadeira": false }
+          ]
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: Authorization
+        value: Bearer {{ _.token_prof }}
+    authentication: {}
+    metaSortKey: -4500
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: req_q_listar_prof
+    parentId: fld_questoes
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/questoes?professorId=1"
+    name: Listar - PROFESSOR (200)
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: Authorization
+        value: Bearer {{ _.token_prof }}
+    authentication: {}
+    metaSortKey: -4490
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: req_q_listar_admin
+    parentId: fld_questoes
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/questoes?professorId=1"
+    name: Listar - ADMIN (403)
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: Authorization
+        value: Bearer {{ _.token_admin }}
+    authentication: {}
+    metaSortKey: -4480
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: fld_atividades
+    parentId: wrk_testroom
+    modified: 1789758113653
+    created: 1789758113653
+    name: Atividade
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -4400
+    _type: request_group
+
+  - _id: req_at_criar
+    parentId: fld_atividades
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/atividades/criar-com-questoes?professorId=1"
+    name: Criar - PROFESSOR (201)
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "titulo": "Prova de Matemática",
+          "descricao": "Avaliação diagnóstica",
+          "instrucoes": "Leia com atenção.",
+          "quantidadeVersoes": 2,
+          "questoes": [
+            { "questaoId": 1, "valorPontos": 5.0 }
+          ]
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: Authorization
+        value: Bearer {{ _.token_prof }}
+    authentication: {}
+    metaSortKey: -4400
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: req_at_listar_prof
+    parentId: fld_atividades
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/atividades?professorId=1"
+    name: Listar - PROFESSOR (200)
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: Authorization
+        value: Bearer {{ _.token_prof }}
+    authentication: {}
+    metaSortKey: -4390
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: req_at_listar_admin
+    parentId: fld_atividades
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/atividades?professorId=1"
+    name: Listar - ADMIN (403)
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: Authorization
+        value: Bearer {{ _.token_admin }}
+    authentication: {}
+    metaSortKey: -4380
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: fld_uploads
+    parentId: wrk_testroom
+    modified: 1789758113653
+    created: 1789758113653
+    name: Uploads
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -4300
+    _type: request_group
+
+  - _id: req_upload
+    parentId: fld_uploads
+    modified: 1789758113653
+    created: 1789758113653
+    url: "{{ _.base_url }}/uploads"
+    name: Upload de arquivo
+    method: POST
+    body:
+      mimeType: multipart/form-data
+      params:
+        - id: pair_upload
+          name: file
+          value: ""
+          description: ""
+          type: file
+    parameters: []
+    headers:
+      - name: Authorization
+        value: Bearer {{ _.token_prof }}
+    authentication: {}
+    metaSortKey: -4300
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+
+  - _id: env_testroom
+    parentId: wrk_testroom
+    modified: 1789758113653
+    created: 1789758113653
+    name: Base Environment
+    data:
+      base_url: https://SUA-URL.onrender.com
+      token_prof: ""
+      token_admin: ""
+    dataPropertyOrder:
+      "&":
+        - base_url
+        - token_prof
+        - token_admin
+    color: null
+    isPrivate: false
+    metaSortKey: 1789758113653
+    _type: environment
+
+  - _id: jar_testroom
+    parentId: wrk_testroom
+    modified: 1789758113653
+    created: 1789758113653
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar

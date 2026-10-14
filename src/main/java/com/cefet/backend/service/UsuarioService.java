@@ -16,11 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UsuarioService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    @Autowired
-    private ProfessorRepository professorRepository;
+    @Autowired private UsuarioRepository usuarioRepository;
+    @Autowired private ProfessorRepository professorRepository;
 
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -30,17 +27,20 @@ public class UsuarioService {
             throw new BusinessException("E-mail já cadastrado.");
         }
 
+        CargoUsuario cargo = dto.getCargo() != null ? dto.getCargo() : CargoUsuario.PROFESSOR;
+
         Usuario usuario = new Usuario();
         usuario.setEmail(dto.getEmail());
         usuario.setSenha(encoder.encode(dto.getSenha()));
-        usuario.setCargo(CargoUsuario.PROFESSOR);
-
+        usuario.setCargo(cargo);
         usuario = usuarioRepository.save(usuario);
 
-        Professor professor = new Professor();
-        professor.setUsuario(usuario);
-        professor.setNome(usuario.getEmail());
-        professorRepository.save(professor);
+        if (cargo == CargoUsuario.PROFESSOR) {
+            Professor professor = new Professor();
+            professor.setUsuario(usuario);
+            professor.setNome(usuario.getEmail());
+            professorRepository.save(professor);
+        }
 
         return new UsuarioResponseDTO(usuario);
     }
