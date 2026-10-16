@@ -21,8 +21,7 @@ public class FileStorageService {
         }
 
         try {
-            String userHome = System.getProperty("user.home");
-            Path pasta = Paths.get(userHome, "Downloads").normalize();
+            Path pasta = Paths.get("C:\\Users\\Alunos\\Downloads").normalize();
 
             if (!Files.exists(pasta)) {
                 Files.createDirectories(pasta);
