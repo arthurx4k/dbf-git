@@ -23,11 +23,10 @@ public class UploadController {
     private FileStorageService fileStorageService;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @Operation(summary = "Upload de arquivo (imagem/PDF) - 🔒 autenticado")
+    @Operation(summary = "Upload de arquivo - salva em ~/Downloads")
     public ResponseEntity<UploadResponseDTO> upload(@RequestParam("file") MultipartFile file) {
-        String nome = fileStorageService.salvar(file);
-        String url = "/arquivos/" + nome;
+        String caminho = fileStorageService.salvar(file);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new UploadResponseDTO(nome, url));
+                .body(new UploadResponseDTO(file.getOriginalFilename(), caminho));
     }
 }
