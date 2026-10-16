@@ -41,6 +41,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
                 .requestMatchers(HttpMethod.GET,  "/usuarios/existe").permitAll()
+                .requestMatchers(HttpMethod.GET, "/arquivos/**").permitAll()
 
                 .requestMatchers(HttpMethod.GET,   "/usuarios/meus-dados").authenticated()
                 .requestMatchers(HttpMethod.PATCH, "/usuarios/senha").authenticated()
